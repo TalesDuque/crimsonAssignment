@@ -1,0 +1,86 @@
+<?php
+/**
+ * @var CrimsonAgility\CustomerSortProducts\Block\ProductsByRange $block
+ */
+
+$currency = $block->getCurrency();
+?>
+<div class="row">
+    <div class="col-md-8">
+        <form name="addData" method="post" id="addData" class="form"
+              action=""
+              data-hasrequired="<?= __('* Required Fields') ?>"
+              data-mage-init='{"validation":{}}'>
+            <fieldset class="fieldset">
+                <legend class="legend">
+                    <span>
+                        <?= __('Search for products between a determined price range.
+                         The high range value must not be 5 times higher than the low range.') ?>
+                    </span>
+                </legend>
+                <fieldset class="fieldset row">
+                    <div class="fields col-md-6">
+                        <div class="field lowrange required">
+                            <label class="label" for="title"><span><?= __('Low Range (' . $currency . ')') ?></span></label>
+                            <div class="control">
+                                <input name="lowrange" id="lowrange" title="lowrange" value="" class="input-text" type="text"
+                                       data-validate="{
+                                       required:true,
+                                       'validate-not-negative-number':true
+                                       }">
+                            </div>
+                        </div>
+                        <div class="field highrange required">
+                            <label class="label" for="title"><span><?= __('High Range (' . $currency . ')') ?></span></label>
+                            <div class="control">
+                                <input name="highrange" id="highrange" title="highrange" value="" class="input-text" type="text"
+                                       data-validate="{
+                                       required:true, 
+                                       'validate-number':true,
+                                       'validate-not-negative-number':true,
+                                       'validate-five-times':true,
+                                       'greater-than-custom':true
+                                       }">
+                            </div>
+                        </div>
+                        <div class="field sort required">
+                            <label class="label" for="title"><span><?= __('Sort Order') ?></span></label>
+                            <div class="control">
+                                <select name="sort" id="sort" title="sort" data-validate="{required:true}">
+                                    <option value="asc">Price Ascending</option>
+                                    <option value="desc">Price Descending</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </fieldset>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <button type="button"
+                            class="action submit primary" 
+                            title="Search"
+                            id="searchBtn"
+                            data-mage-init='{"searchProduct":{}}'>
+                        <span><?= __('Search') ?></span>
+                    </button>
+                </div>
+            </div>
+            <table class="product-table">
+                <caption>Products in range</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Thumbnail</th>
+                        <th scope="col">SKU</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price (<?=__($currency)?>)</th>
+                        <th scope="col">Product URL</th>
+                    </tr>
+                </thead>
+                <tbody class="custom-tbody" id="custom-tbody">
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

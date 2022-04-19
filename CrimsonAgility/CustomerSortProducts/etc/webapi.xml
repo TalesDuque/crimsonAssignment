@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * xml version 1
+ *
+ * @author      Webjump Core Team <dev@webjump.com.br>
+ * @copyright   2021 Webjump (http://www.webjump.com.br)
+ * @license     http://www.webjump.com.br  Copyright
+ * @link        http://www.webjump.com.br
+ *
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/customer/ajax/search" method="POST">
+        <service class="CrimsonAgility\CustomerSortProducts\Api\SearchProductsInterface"
+                 method="getProductCollection"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+        <data>
+            <parameter name="lowerRange">%lower_range%</parameter>
+            <parameter name="higherRange">%higher_range%</parameter>
+            <parameter name="sorting">%sorting%</parameter>
+        </data>
+    </route>
+</routes>
